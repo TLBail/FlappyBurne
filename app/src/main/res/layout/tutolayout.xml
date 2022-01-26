@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/shadowImageView"
+        android:layout_width="78dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getReadyImageView"
+        app:srcCompat="@drawable/shadow" />
+
+    <ImageView
+        android:id="@+id/tapLeftImageView"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/handImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getReadyImageView"
+        app:layout_constraintVertical_bias="0.358"
+        app:srcCompat="@drawable/tapleft" />
+
+    <ImageView
+        android:id="@+id/tapRightImageView"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/handImageView"
+        app:layout_constraintTop_toBottomOf="@+id/getReadyImageView"
+        app:layout_constraintVertical_bias="0.358"
+        app:srcCompat="@drawable/tapright" />
+
+    <ImageView
+        android:id="@+id/arrowImageView"
+        android:layout_width="28dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shadowImageView"
+        app:srcCompat="@drawable/arrow" />
+
+    <ImageView
+        android:id="@+id/handImageView"
+        android:layout_width="52dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/tapRightImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tapLeftImageView"
+        app:layout_constraintTop_toBottomOf="@+id/arrowImageView"
+        app:srcCompat="@drawable/hand" />
+
+    <ImageView
+        android:id="@+id/getReadyImageView"
+        android:layout_width="256dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/shadowImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/getready" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
