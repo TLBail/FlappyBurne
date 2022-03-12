@@ -76,6 +76,7 @@ public class GameView extends SurfaceView implements Runnable {
 
     // permet de changer d'état voir le patern patron d'état
     public void switchState(State state){
+        System.out.println("switching state to " + state.getClass().getName() + "  ...");
         pause();
 
         this.state = state;
@@ -85,6 +86,7 @@ public class GameView extends SurfaceView implements Runnable {
         for(GameComponent gameComponent: gameComponentList) gameComponent.onScreenChange(width, height);
 
         resume();
+        System.out.println("switching complete !!");
 
     }
 
@@ -118,23 +120,28 @@ public class GameView extends SurfaceView implements Runnable {
      * Called by MainActivity.onPause() to stop the thread.
      */
     public void pause() {
+        System.out.println("pausing...");
         mRunning = false;
         try {
             // Stop the thread == rejoin the main thread.
             mGameThread.join();
+            System.out.println("paused !");
         } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
         }
+
     }
 
     /**
      * Called by MainActivity.onResume() to start a thread.
      */
     public void resume() {
+        System.out.println("resuming ...");
         mRunning = true;
         mGameThread = new Thread(this);
         mGameThread.start();
         for(GameComponent gameComponent: gameComponentList) gameComponent.resume();
-
+        System.out.println("resumed ! ");
     }
 
     // appelé a chaque onStop previent tout les GameComponent

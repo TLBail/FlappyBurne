@@ -14,8 +14,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.tlbail.FlappyBurne.Model.AchivementManager;
 import com.tlbail.FlappyBurne.Activity.GameView;
 import com.tlbail.FlappyBurne.Activity.ScoresActivity;
+import com.tlbail.FlappyBurne.Model.Skin;
 import com.tlbail.FlappyBurne.R;
+import com.tlbail.FlappyBurne.State.SkinState;
 import com.tlbail.FlappyBurne.State.TutoState;
+import com.tlbail.FlappyBurne.User.LocalDataLoader.UserPropertyFileLoader;
+import com.tlbail.FlappyBurne.User.User;
 import com.tlbail.FlappyBurne.gameComponent.SoundManager;
 
 public class StartController {
@@ -29,8 +33,8 @@ public class StartController {
     private AppCompatActivity appCompatActivity;
     private AchivementManager achivementManager;
     private ImageView imageViewLEMANS;
-
-
+    private ImageButton burnImagebutton;
+    private Skin skin;
     /**
      * controller du début setup les button et les image
      * @param gameView
@@ -40,10 +44,22 @@ public class StartController {
         this.appCompatActivity = gameView.getAppCompatActivity();
         final SoundManager soundManager = (SoundManager) gameView.getGameComponentByClass(SoundManager.class);
         achivementManager = AchivementManager.getInstance();
+        final User user = new User("bob", new UserPropertyFileLoader(appCompatActivity));
+        skin = Skin.valueOf(user.get(Skin.SKINKEY));
+
         createUI();
 
         bindUI();
         title.setText(R.string.app_name);
+
+        burnImagebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                soundManager.playMenuSound();
+                subMenu.removeAllViews();
+                gameView.switchState(new SkinState(gameView));
+            }
+        });
 
         startImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +99,7 @@ public class StartController {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflator.inflate(R.layout.start_layout, subMenu);
 
+
     }
 
     /**
@@ -97,6 +114,9 @@ public class StartController {
         cupImageButton.setImageResource(R.drawable.cup);
         imageViewLEMANS = appCompatActivity.findViewById(R.id.imageViewLEMANS);
         imageViewLEMANS.setImageResource(R.drawable.logo_iut);
+        burnImagebutton = appCompatActivity.findViewById(R.id.BigBurneBigImageButton);
+        burnImagebutton.setImageResource(skin.getHeadDrawable());
+
     }
 
 

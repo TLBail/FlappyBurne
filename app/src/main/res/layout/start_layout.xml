@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:contentDescription="start button"
         android:src="@drawable/startbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:contentDescription="start button"
         android:src="@drawable/scorebutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,24 +33,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.75" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="104dp"
-        android:layout_height="68dp"
-        android:src="@drawable/fbs02"
-        app:layout_constraintBottom_toTopOf="@+id/startImageButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.502" />
-
     <ImageButton
         android:id="@+id/CupimageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
         android:background="@null"
+        android:contentDescription="start button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -76,4 +67,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/logo_iut" />
+
+    <ImageButton
+        android:id="@+id/BigBurneBigImageButton"
+        android:layout_width="182dp"
+        android:layout_height="178dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="skin button"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/startImageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fbs51" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="102dp"
+        android:layout_height="17dp"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="text"
+        android:fontFamily="@font/mpr"
+        android:rotation="25"
+        android:text="New ! click me"
+        android:textColor="#CDDC39"
+        app:layout_constraintBottom_toTopOf="@+id/BigBurneBigImageButton"
+        app:layout_constraintEnd_toEndOf="@+id/BigBurneBigImageButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

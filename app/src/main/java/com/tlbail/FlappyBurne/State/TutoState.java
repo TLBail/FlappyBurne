@@ -32,6 +32,8 @@ public class TutoState implements State{
     }
 
 
+    public boolean diying = false;
+
     @Override
     public void createComponent() {
         Graphics graphics = new Graphics(gameView);
@@ -42,6 +44,8 @@ public class TutoState implements State{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //"ui is handled by other class"
+        if(diying) return true;
+        diying = true;
         ConstraintLayout subMenu = gameView.getAppCompatActivity().findViewById(R.id.subMenu);
         subMenu.removeAllViews();
         gameView.switchState(new GamingState(gameView));

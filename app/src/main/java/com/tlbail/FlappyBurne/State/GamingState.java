@@ -22,6 +22,7 @@ public class GamingState implements State{
     private boolean deathAnimationHaveBeenPlayed;
     private Player player;
     private GameLogic gameLogic;
+    private boolean isReady;
 
     /**
      * Etat du patron d'état
@@ -33,6 +34,7 @@ public class GamingState implements State{
         this.gameView = gameView;
         this.isDead = false;
         this.deathAnimationHaveBeenPlayed = false;
+        this.isReady = false;
     }
 
 
@@ -45,17 +47,31 @@ public class GamingState implements State{
         new ScoreManager(gameView);
         soundManager = new SoundManager(gameView);
 
+
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                isReady = true;
+            }
+        }).start();
+
+
     }
 
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!isReady) return true;
         if(isDead){
             gameView.switchState(new GameOverState(gameView));
         }else{
             if(event.getAction() == MotionEvent.ACTION_DOWN){
-                Player player = (Player) gameView.getGameComponentByClass(Player.class);
                 if(player == null) return true;
                 player.moveUp();
                 soundManager.onPlayerMoveUpPlaySound();
@@ -80,7 +96,6 @@ public class GamingState implements State{
     private boolean isDiing(){
         return gameLogic.playerOverlappingTubes() || player.playerIsEatingTheFloor();
     }
-
 
 
     @Override

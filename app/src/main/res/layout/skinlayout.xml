@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="426dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bigbackground" />
+
+    <ImageView
+        android:id="@+id/mainBigBurne"
+        android:layout_width="153dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backgroundImage"
+        app:srcCompat="@drawable/fbs51" />
+
+    <ImageButton
+        android:id="@+id/bottomLeftBurne"
+        android:layout_width="102dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="image"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toStartOf="@+id/bottomRightBurne"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UpperleftBurne"
+        app:srcCompat="@drawable/bfbs51" />
+
+    <ImageButton
+        android:id="@+id/bottomRightBurne"
+        android:layout_width="102dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="80dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="image"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upperRightburne"
+        app:srcCompat="@drawable/cfbs51" />
+
+    <ImageButton
+        android:id="@+id/upperRightburne"
+        android:layout_width="102dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="image"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainBigBurne"
+        app:srcCompat="@drawable/gfbs51" />
+
+    <ImageButton
+        android:id="@+id/UpperleftBurne"
+        android:layout_width="102dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="image"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toStartOf="@+id/upperRightburne"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainBigBurne"
+        app:srcCompat="@drawable/fbs51" />
+
+    <ImageButton
+        android:id="@+id/Okbutton"
+        android:layout_width="327dp"
+        android:layout_height="89dp"
+        android:backgroundTint="#00B84747"
+        android:contentDescription="ok button"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/okbutton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

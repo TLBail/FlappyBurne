@@ -126,7 +126,9 @@ public class Graphics extends GameComponent {
 
 
     public void drawCanvas(Canvas canvas) {
-            drawBackground(canvas);
+        if(canvas == null) return;
+
+        drawBackground(canvas);
             drawTubes(canvas);
             drawGround(canvas);
             drawPlayer(canvas);
@@ -176,7 +178,7 @@ public class Graphics extends GameComponent {
         });
     }
 
-    private void drawPlayer(Canvas canvas) {
+    private synchronized void drawPlayer(Canvas canvas) {
         Player player = (Player) getGameView().getGameComponentByClass(Player.class);
         Matrix matrix = new Matrix();
         matrix.postTranslate(-player.getWidth()/2, -player.getHeight()/2);

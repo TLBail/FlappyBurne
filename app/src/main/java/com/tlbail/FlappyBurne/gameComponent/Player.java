@@ -5,7 +5,10 @@ import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 
 import com.tlbail.FlappyBurne.Activity.GameView;
+import com.tlbail.FlappyBurne.Model.Skin;
 import com.tlbail.FlappyBurne.R;
+import com.tlbail.FlappyBurne.User.LocalDataLoader.UserPropertyFileLoader;
+import com.tlbail.FlappyBurne.User.User;
 
 public class Player extends GameComponent {
 
@@ -23,7 +26,7 @@ public class Player extends GameComponent {
     private int timeFromLastBitmapChange;
     private float rotationAngle;
     private boolean isStop;
-
+    private Skin skin;
     private static final float MOVEUPFORCE = 18;
 
 
@@ -41,21 +44,26 @@ public class Player extends GameComponent {
         this.y = y;
         yVelocity = 0;
         timeFromLastBitmapChange = 0;
+        final User user = new User("bob", new UserPropertyFileLoader(gameView.getAppCompatActivity()));
+        skin = Skin.valueOf(user.get(Skin.SKINKEY));
+
         loadBitmap();
 
         width = playerBitmapFr1.getWidth();
         height = playerBitmapFr1.getHeight();
         rotationAngle = 0;
+        
+        
     }
 
     private void loadBitmap() {
-        playerBitmapFr1 = BitmapFactory.decodeResource( getAppCompatActivity().getResources(), R.drawable.fbs01);
+        playerBitmapFr1 = BitmapFactory.decodeResource( getAppCompatActivity().getResources(), skin.getFramesDrawables()[0]);
         playerBitmapFr1 = Bitmap.createScaledBitmap(playerBitmapFr1, 120, 120, false);
 
-        playerBitmapFr2 = BitmapFactory.decodeResource( getAppCompatActivity().getResources(), R.drawable.fbs02);
+        playerBitmapFr2 = BitmapFactory.decodeResource( getAppCompatActivity().getResources(), skin.getFramesDrawables()[1]);
         playerBitmapFr2 = Bitmap.createScaledBitmap(playerBitmapFr2, 120, 120, false);
 
-        playerBitmapFr3 = BitmapFactory.decodeResource( getAppCompatActivity().getResources(), R.drawable.fbs03);
+        playerBitmapFr3 = BitmapFactory.decodeResource( getAppCompatActivity().getResources(), skin.getFramesDrawables()[2]);
         playerBitmapFr3 = Bitmap.createScaledBitmap(playerBitmapFr3, 120, 120, false);
 
 
@@ -77,6 +85,7 @@ public class Player extends GameComponent {
      *
      */
     public void update(){
+        if(isStop) return;
         yVelocity += yspeed * getGameView().getDeltaTime();
         if(playerIsEatingTheFloor()){
             yVelocity = 0;
@@ -110,8 +119,7 @@ public class Player extends GameComponent {
     }
 
     public void moveUp() {
-        if(y < 0) return;
-
+        if(isStop || y < 0) return;
         yVelocity = -MOVEUPFORCE;
     }
 
