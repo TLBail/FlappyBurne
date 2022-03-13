@@ -23,10 +23,12 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.tlbail.FlappyBurne.Model.AchivementManager;
 import com.tlbail.FlappyBurne.Model.ScoreDataBase;
+import com.tlbail.FlappyBurne.Model.Skin;
 import com.tlbail.FlappyBurne.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.tlbail.FlappyBurne.User.LocalDataLoader.UserPropertyFileLoader;
+import com.tlbail.FlappyBurne.User.User;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        final User user = new User("bob", new UserPropertyFileLoader(this));
+        if(!user.containsKey(Skin.SKINKEY)) user.setProperty(Skin.SKINKEY, String.valueOf(Skin.CLASSIC));
 
         setUpGoogleAchivement();
 

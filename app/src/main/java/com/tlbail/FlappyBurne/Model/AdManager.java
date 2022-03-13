@@ -1,6 +1,7 @@
 package com.tlbail.FlappyBurne.Model;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 public class AdManager {
 
-    private static final String adId = "ca-app-pub-8453388567575948/8101669575";
+    private static final String adId = "ca-app-pub-8453388567575948/3949623762";
     private static final String adTestId = "ca-app-pub-3940256099942544/1033173712";
 
     private static final String TAG = "AdManager";
@@ -53,8 +54,15 @@ public class AdManager {
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         // Handle the error
                         Log.i(TAG, loadAdError.getMessage());
+                        String error =
+                                String.format(
+                                        "domain: %s, code: %d, message: %s",
+                                        loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
+                        Log.e(TAG, error);
                         mInterstitialAd = null;
                     }
+
+
                 });
     }
 

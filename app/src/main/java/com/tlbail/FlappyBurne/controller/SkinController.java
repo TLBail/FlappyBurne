@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.tlbail.FlappyBurne.Activity.GameView;
+import com.tlbail.FlappyBurne.Model.AdManager;
 import com.tlbail.FlappyBurne.Model.Skin;
 import com.tlbail.FlappyBurne.R;
 import com.tlbail.FlappyBurne.State.StartState;
@@ -49,6 +50,7 @@ public class SkinController {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AdManager adManager = new AdManager(gameView.getAppCompatActivity());
                 soundManager.playMenuSound();
                 subMenu.removeAllViews();
                 gameView.switchState(new StartState(gameView));
@@ -88,6 +90,7 @@ public class SkinController {
                 soundManager.playMenuSound();
                 bigBurne.setImageResource(R.drawable.bfbs51);
                 user.setProperty(Skin.SKINKEY, Skin.BLUE.name());
+
             }
         });
 
