@@ -15,7 +15,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 public class AdManager {
 
-    private static final String adId = "ca-app-pub-8453388567575948/3949623762";
+    private static final String adId = "ca-app-pub-8453388567575948/8101669575";
     private static final String adTestId = "ca-app-pub-3940256099942544/1033173712";
 
     private static final String TAG = "AdManager";

@@ -10,8 +10,8 @@ android {
         applicationId "com.tlbail.FlappyBurne"
         minSdk 23
         targetSdk 30
-        versionCode 16
-        versionName "1.0"
+        versionCode 18
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

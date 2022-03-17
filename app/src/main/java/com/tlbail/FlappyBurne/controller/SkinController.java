@@ -31,6 +31,8 @@ public class SkinController {
     private ImageButton upperRightBurne;
     private ImageButton bottomLeftBurne;
     private ImageButton bottomRightBurne;
+    private ImageButton tacosBurneImageButton;
+    private ImageButton redBurneImageButton;
     private ImageView okButton;
     private Skin skin;
 
@@ -94,7 +96,23 @@ public class SkinController {
             }
         });
 
+        redBurneImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                soundManager.playMenuSound();
+                bigBurne.setImageResource(R.drawable.rfbs01);
+                user.setProperty(Skin.SKINKEY, Skin.RED.name());
+            }
+        });
 
+        tacosBurneImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                soundManager.playMenuSound();
+                bigBurne.setImageResource(R.drawable.tfbs51);
+                user.setProperty(Skin.SKINKEY, Skin.TACOS.name());
+            }
+        });
 
     }
 
@@ -125,6 +143,10 @@ public class SkinController {
         bottomRightBurne.setImageResource(R.drawable.cfbs51);
         okButton = appCompatActivity.findViewById(R.id.Okbutton);
         okButton.setImageResource(R.drawable.okbutton);
+        redBurneImageButton = appCompatActivity.findViewById(R.id.redBurnImageButton);
+        redBurneImageButton.setImageResource(R.drawable.rfbs01);
+        tacosBurneImageButton = appCompatActivity.findViewById(R.id.tacosBurneImageButton);
+        tacosBurneImageButton.setImageResource(R.drawable.tfbs51);
     }
 
 }

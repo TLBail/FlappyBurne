@@ -7,7 +7,8 @@ public enum Skin {
     CLASSIC(new int[]{R.drawable.fbs01, R.drawable.fbs02, R.drawable.fbs03}, R.drawable.fbs51),
     GOLD(new int[]{R.drawable.gfbs01,R.drawable.gfbs02,R.drawable.gfbs03}, R.drawable.gfbs51),
     BLUE(new int[]{R.drawable.bfbs01,R.drawable.bfbs02,R.drawable.bfbs03}, R.drawable.bfbs51),
-    RED(new int[]{R.drawable.rfbs01,R.drawable.rfbs02,R.drawable.rfbs03}, 0),
+    RED(new int[]{R.drawable.rfbs01,R.drawable.rfbs02,R.drawable.rfbs03}, R.drawable.rfbs01),
+    TACOS(new int[]{R.drawable.tfbs01, R.drawable.tfbs02, R.drawable.tfbs03}, R.drawable.tfbs51),
     CYAN(new int[]{R.drawable.cfbs01,R.drawable.cfbs02,R.drawable.cfbs03}, R.drawable.cfbs51);
 
     public static final String SKINKEY = "skin";
