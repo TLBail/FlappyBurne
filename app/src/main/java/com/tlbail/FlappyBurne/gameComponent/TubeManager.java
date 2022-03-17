@@ -21,6 +21,7 @@ public class TubeManager extends GameComponent {
     private static final int NUMBER_MIN_OF_TUBE_ACTIVE = 5;
     private static final int MULTIPLIYERFORSTARTTEMPO = 3; // permet de mettre les tubes plus ou moins loin au début
     public  static final int SPACE_BETWEEN_TUBES_Y = 450; // permet de mettre les tubes plus ou moins loin au début
+
     private boolean isStoped;
 
 
@@ -109,13 +110,20 @@ public class TubeManager extends GameComponent {
      */
     private Tube createTube() {
         Tube tube = getTubeNotActive();
+        ScoreManager scoreManager = (ScoreManager) getGameView().getGameComponentByClass(ScoreManager.class);
 
         if(tube == null){
             tube = new Tube(this, getXpos(), getRandomYpos(), true);
             tubes.add(tube);
+
         }else{
             tube.reload(getXpos(), getRandomYpos());
         }
+        if(scoreManager.getScore() >= scoreManager.getBestScore() - 4){
+            System.out.println("gollllllden");
+            tube.setGolden();
+        }
+
         return tube;
     }
 

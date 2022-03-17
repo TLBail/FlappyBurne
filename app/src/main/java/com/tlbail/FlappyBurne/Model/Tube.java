@@ -13,6 +13,7 @@ public class Tube {
     private TubeManager tubeManager;
     private boolean isActive;
     private boolean scoreHasBeenCounted;
+    private boolean golden;
 
     /**
      * POJO Tube avec le déplacement tu tube a chaque frame
@@ -71,5 +72,13 @@ public class Tube {
 
     public boolean isScoreHasBeenCounted() {
         return scoreHasBeenCounted;
+    }
+
+    public void setGolden() {
+        this.golden = true;
+    }
+
+    public boolean isGolden() {
+        return golden;
     }
 }

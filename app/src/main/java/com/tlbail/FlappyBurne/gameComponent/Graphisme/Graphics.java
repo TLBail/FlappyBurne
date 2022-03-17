@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.widget.TextView;
 
+import com.tlbail.FlappyBurne.Model.Score;
 import com.tlbail.FlappyBurne.gameComponent.CapteurManager;
 import com.tlbail.FlappyBurne.gameComponent.OnReadableLigth;
 import com.tlbail.FlappyBurne.gameComponent.GameComponent;
@@ -22,6 +23,7 @@ public class Graphics extends GameComponent {
 
     private static final int GROUNDSPEED =  -6 ;
     private static final int CITYSPEED = -1;
+    private static final float SKYSPEED = -0.3f;
     private Bitmap tubeReverseBitmap;
     private Bitmap backgroundBitmap;
     private Bitmap backgroundDayBitmap;
@@ -37,6 +39,10 @@ public class Graphics extends GameComponent {
     private boolean isStopped;
     private int xGround;
     private int xCity;
+    private float xSky;
+
+    private Bitmap goldenTubeBitmap;
+    private Bitmap goldenTubeReverseBitmap;
 
     /**
      * class qui s'occupe de déssiner tout les image sur le canvas
@@ -84,6 +90,13 @@ public class Graphics extends GameComponent {
         tubeReverseBitmap = BitmapFactory.decodeResource(getAppCompatActivity().getResources(), R.drawable.tube2);
         tubeReverseBitmap = Bitmap.createScaledBitmap(tubeReverseBitmap, (int) (tubeReverseBitmap.getWidth() * 1.2), (int)(tubeReverseBitmap.getHeight() * 1.2), false);
 
+        goldenTubeBitmap = BitmapFactory.decodeResource(getAppCompatActivity().getResources(), R.drawable.goldentube);
+        goldenTubeBitmap = Bitmap.createScaledBitmap(goldenTubeBitmap, (int) (goldenTubeBitmap.getWidth() * 1.2), (int)(goldenTubeBitmap.getHeight() * 1.2), false);
+        goldenTubeReverseBitmap = BitmapFactory.decodeResource(getAppCompatActivity().getResources(), R.drawable.goldentube2);
+        goldenTubeReverseBitmap = Bitmap.createScaledBitmap(goldenTubeReverseBitmap, (int) (goldenTubeReverseBitmap.getWidth() * 1.2), (int)(goldenTubeReverseBitmap.getHeight() * 1.2), false);
+
+
+
         groundBitmap = BitmapFactory.decodeResource(getAppCompatActivity().getResources(), R.drawable.ground);
 
         cityBitmap = BitmapFactory.decodeResource(getAppCompatActivity().getResources(), R.drawable.city);
@@ -97,11 +110,17 @@ public class Graphics extends GameComponent {
     private void drawTubes(Canvas canvas) {
         TubeManager tubeManager = (TubeManager) getGameView().getGameComponentByClass(TubeManager.class);
         for (Tube tube : tubeManager.getTubes()) {
-            canvas.drawBitmap(tubeBitmap, tube.getX(), tube.getY(), mPaint);
-            int posXTopTube = tube.getX();
-            int posYTopTube = tube.getY() - tubeReverseBitmap.getHeight() - TubeManager.SPACE_BETWEEN_TUBES_Y;
-            canvas.drawBitmap(tubeReverseBitmap, posXTopTube , posYTopTube, mPaint);
-
+                if(tube.isGolden()){
+                    canvas.drawBitmap(goldenTubeBitmap, tube.getX(), tube.getY(), mPaint);
+                    int posXTopTube = tube.getX();
+                    int posYTopTube = tube.getY() - goldenTubeReverseBitmap.getHeight() - TubeManager.SPACE_BETWEEN_TUBES_Y;
+                    canvas.drawBitmap(goldenTubeReverseBitmap, posXTopTube , posYTopTube, mPaint);
+                }else{
+                    canvas.drawBitmap(tubeBitmap, tube.getX(), tube.getY(), mPaint);
+                    int posXTopTube = tube.getX();
+                    int posYTopTube = tube.getY() - tubeReverseBitmap.getHeight() - TubeManager.SPACE_BETWEEN_TUBES_Y;
+                    canvas.drawBitmap(tubeReverseBitmap, posXTopTube , posYTopTube, mPaint);
+                }
         }
 
     }
@@ -114,10 +133,12 @@ public class Graphics extends GameComponent {
         backgroundDayBitmap = Bitmap.createScaledBitmap(backgroundDayBitmap, screenWidth, screenHeight, false);
         backgroundNightBitmap = Bitmap.createScaledBitmap(backgroundNightBitmap, screenWidth, screenHeight, false);
         groundBitmap = Bitmap.createScaledBitmap(groundBitmap, screenWidth, groundBitmap.getHeight(), false);
-        tubeBitmap = Bitmap.createScaledBitmap(tubeBitmap, tubeBitmap.getWidth(), screenHeight, false);
-        tubeReverseBitmap = Bitmap.createScaledBitmap(tubeReverseBitmap, tubeReverseBitmap.getWidth(), screenHeight,false);
         cityBitmap = Bitmap.createScaledBitmap(cityBitmap, screenWidth * 3, 300, false);
         skyBitmap = Bitmap.createScaledBitmap(skyBitmap, screenWidth, skyBitmap.getHeight(), false);
+        tubeBitmap = Bitmap.createScaledBitmap(tubeBitmap, tubeBitmap.getWidth(), screenHeight, false);
+        tubeReverseBitmap = Bitmap.createScaledBitmap(tubeReverseBitmap, tubeReverseBitmap.getWidth(), screenHeight,false);
+        goldenTubeBitmap = Bitmap.createScaledBitmap(goldenTubeBitmap, tubeBitmap.getWidth(), screenHeight, false);
+        goldenTubeReverseBitmap = Bitmap.createScaledBitmap(goldenTubeReverseBitmap, tubeReverseBitmap.getWidth(), screenHeight,false);
 
         mPaint.setTextSize(screenHeight / 10);
         this.screenWidth = screenWidth;
@@ -145,12 +166,25 @@ public class Graphics extends GameComponent {
     protected void drawBackground(Canvas canvas){
         canvas.drawBitmap(backgroundBitmap, 0, 0, mPaint);
         drawCity(canvas);
-        canvas.drawBitmap(skyBitmap, 0, (float) (screenHeight * 0.65 - skyBitmap.getHeight()),mPaint);
+        drawSky(canvas);
+        //canvas.drawBitmap(skyBitmap, 0, (float) (screenHeight * 0.65 - skyBitmap.getHeight()),mPaint);
 
     }
 
     //dessine la ville et la fait défilé si elle arrivé au bout on la remet tout a droite
+    protected void drawSky(Canvas canvas){
+        System.out.println("xSky = " + xSky);
+        if(!isStopped) xSky += SKYSPEED * getGameView().getDeltaTime();
+        if(xSky < -skyBitmap.getWidth()) xSky = 0;
+        float skyY =  (float) (screenHeight * 0.65 - skyBitmap.getHeight());
+        canvas.drawBitmap(skyBitmap, xSky,skyY, mPaint);
+        canvas.drawBitmap(skyBitmap, xSky + skyBitmap.getWidth() - 5, skyY, mPaint);
+    }
+
+
+    //dessine la ville et la fait défilé si elle arrivé au bout on la remet tout a droite
     protected void drawCity(Canvas canvas){
+        System.out.println("xCity = " + xCity);
         if(!isStopped) xCity += CITYSPEED * getGameView().getDeltaTime();
         if(xCity < -cityBitmap.getWidth()) xCity = 0;
         float cityY =  (float) (screenHeight * 0.65 - cityBitmap.getHeight());
